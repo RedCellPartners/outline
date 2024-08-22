@@ -11,10 +11,6 @@ helm-repo:
     hcpSecretAppName: "outline"
     hcpSecretRefresh: "24h"
     replicas: 1
-    publicIngress: "true"
-    albBackendProtocol: "HTTP"
-    awsCertArn: "arn:aws:acm:us-east-1:010438497047:certificate/152bcea2-67c0-414e-a147-4fe8a51cf333"
-    securityGroups: "sg-05769b4734a45a5d0"
   configMapValues:
     PORT: "3000"
     NODE_ENV: "production"
