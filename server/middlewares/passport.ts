@@ -11,6 +11,10 @@ import { parseState } from "@server/utils/passport";
 
 export default function createMiddleware(providerName: string) {
   return function passportMiddleware(ctx: Context) {
+    Logger.info(
+        "http",
+        `providerName "${providerName}"`
+    );
     return passport.authorize(
       providerName,
       {

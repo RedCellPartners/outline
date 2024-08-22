@@ -27,11 +27,15 @@ export function getSessionsInCookie(ctx: Context) {
   }
 }
 
-export async function signIn(
+export function signIn(
   ctx: Context,
   service: string,
   { user, team, client, isNewTeam }: AuthenticationResult
 ) {
+  Logger.info(
+      "http",
+      `team ${team}, user ${user}, client ${client}, isNewTeam ${isNewTeam}`
+  );
   if (team.isSuspended) {
     return ctx.redirect("/?notice=team-suspended");
   }
@@ -43,7 +47,10 @@ export async function signIn(
     // see: scenes/Login/index.js for where this cookie is written when
     // viewing the /login or /create pages. It is a URI encoded JSON string.
     const cookie = ctx.cookies.get("signupQueryParams");
-
+    Logger.info(
+        "http",
+        `checkpoint 1`
+    );
     if (cookie) {
       try {
         const signupQueryParams = pick(
@@ -58,10 +65,17 @@ export async function signIn(
       }
     }
   }
-
+  Logger.info(
+      "http",
+      `checkpoint 2`
+  );
   // update the database when the user last signed in
   await user.updateSignedIn(ctx.request.ip);
 
+  Logger.info(
+      "http",
+      `checkpoint 3`
+  );
   // don't await event creation for a faster sign-in
   void Event.create({
     name: "users.signin",
@@ -74,6 +88,10 @@ export async function signIn(
     },
     ip: ctx.request.ip,
   });
+  Logger.info(
+      "http",
+      `checkpoint 4`
+  );
   const domain = getCookieDomain(ctx.request.hostname, env.isCloudHosted);
   const expires = addMonths(new Date(), 3);
 
@@ -106,7 +124,10 @@ export async function signIn(
       expires,
       domain,
     });
-
+    Logger.info(
+        "http",
+        `checkpoint 5`
+    );
     // If the authentication request originally came from the desktop app then we send the user
     // back to a screen in the web app that will immediately redirect to the desktop. The reason
     // to do this from the client is that if you redirect from the server then the browser ends up
@@ -128,7 +149,15 @@ export async function signIn(
 
     const defaultCollectionId = team.defaultCollectionId;
 
+    Logger.info(
+        "http",
+        `checkpoint 6`
+    );
     if (defaultCollectionId) {
+      Logger.info(
+          "http",
+          `checkpoint 7`
+      );
       const collection = await Collection.findOne({
         where: {
           id: defaultCollectionId,
@@ -136,12 +165,20 @@ export async function signIn(
         },
       });
 
+      Logger.info(
+          "http",
+          `checkpoint 8`
+      );
       if (collection) {
         ctx.redirect(`${team.url}${collection.url}`);
         return;
       }
     }
 
+    Logger.info(
+        "http",
+        `checkpoint 9`
+    );
     const [collection, view] = await Promise.all([
       Collection.findFirstCollectionForUser(user),
       View.findOne({
@@ -150,6 +187,10 @@ export async function signIn(
         },
       }),
     ]);
+    Logger.info(
+        "http",
+        `checkpoint 10`
+    );
     const hasViewedDocuments = !!view;
 
     ctx.redirect(
