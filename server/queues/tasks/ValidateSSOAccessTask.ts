@@ -36,6 +36,7 @@ export default class ValidateSSOAccessTask extends BaseTask<Props> {
         // Promise.any will throw an AggregateError if all validateAccess calls throw, this would
         // only be the case if all receive an unexpected error. We want to throw the first error
         // as a descriptive error message.
+        console.log(err)
         if ("errors" in err && err.errors.length > 0) {
           throw err.errors[0];
         }

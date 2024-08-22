@@ -1,0 +1,33 @@
+helm-repo:
+  service:
+    port: 3000
+    targetPort: 3000
+    name: "outline"
+    image: "010438497047.dkr.ecr.us-east-1.amazonaws.com/ecr:outline-$ARGOCD_APP_REVISION"
+    memoryRequest: "1G"
+    memoryLimit: "2G"
+    cpuRequest: "500m"
+    cpuLimit: "1000m"
+    hcpSecretAppName: "outline"
+    hcpSecretRefresh: "24h"
+    replicas: 1
+  configMapValues:
+    PORT: "3000"
+    NODE_ENV: "production"
+    DEBUG: "http"
+    AWS_ACCESS_KEY_ID: "AKIAQE3RO2MLYD6IF35Z"
+    AWS_S3_UPLOAD_BUCKET_URL: "https://outline-07b8b987-303c-4b28-ada8-686c3fe74a07.s3.amazonaws.com"
+    AWS_REGION: "us-east-1"
+    AWS_S3_UPLOAD_BUCKET_NAME: "outline-07b8b987-303c-4b28-ada8-686c3fe74a07"
+    FILE_STORAGE_UPLOAD_MAX_SIZE: "26214400"
+    AWS_S3_FORCE_PATH_STYLE: "true"
+    AWS_S3_ACL: "private"
+    URL: "https://outline.kaledo.ai"
+    COLLABORATION_URL: "https://outline.kaledo.ai"
+    REDIS_URL: "redis-session-cluster-id.v3vlvt.0001.use1.cache.amazonaws.com"
+    OIDC_CLIENT_ID: "uz6ZDHUVHddbc5Ceguz43QCR2Ra49QjV0G1DG2IU"
+    OIDC_AUTH_URI: "https://authentik.kaledo.ai/application/o/authorize/"
+    OIDC_TOKEN_URI: "https://authentik.kaledo.ai/application/o/token/"
+    OIDC_USERINFO_URI: "https://authentik.kaledo.ai/application/o/userinfo/"
+    OIDC_LOGOUT_URI: "https://authentik.kaledo.ai/application/o/wiki/end-session/"
+    OIDC_DISPLAY_NAME: "authentik"

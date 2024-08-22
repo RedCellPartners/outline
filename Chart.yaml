@@ -1,0 +1,10 @@
+apiVersion: v2
+name: application-proxy
+description: An Umbrella Helm chart
+type: application
+version: 1.0.123
+appVersion: "1.16.0"
+dependencies:
+  - name: helm-repo
+    version: 1.0.1
+    repository: oci://public.ecr.aws/l9b9h0o8
