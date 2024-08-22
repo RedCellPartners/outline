@@ -1,4 +1,4 @@
-FROM node:20-slim AS deps
+FROM node:20-slim
 
 COPY ./package.json ./yarn.lock ./
 COPY ./patches ./patches
@@ -11,7 +11,6 @@ RUN yarn install --no-optional --frozen-lockfile --network-timeout 1000000 && \
   yarn cache clean
 
 COPY . .
-ARG CDN_URL
 RUN yarn build
 
 RUN rm -rf node_modules
