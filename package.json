@@ -36,9 +36,6 @@
     "type": "GitHub Sponsors ❤",
     "url": "https://github.com/sponsors/outline"
   },
-  "engines": {
-    "node": ">= 18 <=20"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/outline/outline.git"

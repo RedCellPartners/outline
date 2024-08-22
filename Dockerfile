@@ -1,5 +1,31 @@
 ARG APP_PATH=/opt/outline
-FROM outlinewiki/outline-base AS base
+ARG APP_PATH=/opt/outline
+FROM node:20-slim AS deps
+
+ARG APP_PATH
+WORKDIR $APP_PATH
+COPY ./package.json ./yarn.lock ./
+COPY ./patches ./patches
+
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN yarn install --no-optional --frozen-lockfile --network-timeout 1000000 && \
+  yarn cache clean
+
+COPY . .
+ARG CDN_URL
+RUN yarn build
+
+RUN rm -rf node_modules
+
+RUN yarn install --production=true --frozen-lockfile --network-timeout 1000000 && \
+  yarn cache clean
+
+ENV PORT=3000
+HEALTHCHECK CMD wget -qO- http://localhost:${PORT}/_health | grep -q "OK" || exit 1
+
 
 ARG APP_PATH
 WORKDIR $APP_PATH
