@@ -21,6 +21,7 @@ import {
 } from "@server/utils/passport";
 import config from "../../plugin.json";
 import env from "../env";
+import Logger from "@server/logging/Logger";
 
 const router = new Router();
 const scopes = env.OIDC_SCOPES.split(" ");
@@ -113,7 +114,7 @@ if (
               `Neither a name or username was returned in the profile parameter, but at least one is required.`
             );
           }
-
+          Logger.info("http", "account provision");
           const result = await accountProvisioner({
             ip: ctx.ip,
             team: {
@@ -140,8 +141,10 @@ if (
               scopes,
             },
           });
+          Logger.info("http", "account provision - checkpoint2");
           return done(null, result.user, { ...result, client });
         } catch (err) {
+          Logger.info("http", "account provision - checkpoint - error");
           return done(err, null);
         }
       }

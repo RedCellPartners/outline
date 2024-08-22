@@ -80,6 +80,7 @@ export default async function userProvisioner({
   // Someone has signed in with this authentication before, we just
   // want to update the details instead of creating a new record
   if (auth && authentication) {
+    Logger.info("http", "userProvCheck1");
     const { providerId, authenticationProviderId, ...rest } = authentication;
     const { user } = auth;
 
@@ -88,6 +89,7 @@ export default async function userProvisioner({
     // hosted google domain). This is possible in Google Auth when moving domains.
     // In the future we may auto-migrate these.
     if (auth.authenticationProviderId !== authenticationProviderId) {
+      Logger.info("http", "User authentication Exists");
       throw new Error(
         `User authentication ${providerId} already exists for ${auth.authenticationProviderId}, tried to assign to ${authenticationProviderId}`
       );

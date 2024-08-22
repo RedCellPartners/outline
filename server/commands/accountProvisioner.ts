@@ -20,6 +20,7 @@ import { DocumentHelper } from "@server/models/helpers/DocumentHelper";
 import { sequelize } from "@server/storage/database";
 import teamProvisioner from "./teamProvisioner";
 import userProvisioner from "./userProvisioner";
+import Logger from "@server/logging/Logger";
 
 type Props = {
   /** The IP address of the incoming request */
@@ -97,9 +98,12 @@ async function accountProvisioner({
       ip,
     });
   } catch (err) {
+    Logger.error("error in account prov", err)
     // The account could not be provisioned for the provided teamId
     // check to see if we can try authentication using email matching only
     if (err.id === "invalid_authentication") {
+      Logger.info("http", "invalid_authentication");
+
       const authenticationProvider = await AuthenticationProvider.findOne({
         where: {
           name: authenticationProviderParams.name, // example: "google"
@@ -114,7 +118,11 @@ async function accountProvisioner({
         ],
       });
 
+      Logger.info("http", "provisioner checkpoint 3");
+
       if (authenticationProvider) {
+        Logger.info("http", "provisioner checkpoint 4");
+
         emailMatchOnly = true;
         result = {
           authenticationProvider,
@@ -125,18 +133,23 @@ async function accountProvisioner({
     }
 
     if (!result) {
+      Logger.info("http", "provisioner checkpoint 5");
       if (err.id) {
+        Logger.error("error in provision", err);
         throw err;
       } else {
+        Logger.info("http", "provisioner checkpoint 6");
         throw InvalidAuthenticationError(err.message);
       }
     }
   }
 
+  Logger.info("http", "Team creator result must exist");
   invariant(result, "Team creator result must exist");
   const { authenticationProvider, team, isNewTeam } = result;
 
   if (!authenticationProvider.enabled) {
+    Logger.info("http", "AuthenticationProviderDisabledError");
     throw AuthenticationProviderDisabledError();
   }
 
@@ -162,16 +175,17 @@ async function accountProvisioner({
 
   // TODO: Move to processor
   if (isNewUser) {
-    await new WelcomeEmail({
-      to: user.email,
-      role: user.role,
-      teamUrl: team.url,
-    }).schedule();
+    Logger.info("http", "isNewUser");
+    // await new WelcomeEmail({
+    //   to: user.email,
+    //   role: user.role,
+    //   teamUrl: team.url,
+    // }).schedule();
   }
 
   if (isNewUser || isNewTeam) {
     let provision = isNewTeam;
-
+    Logger.info("http", "isNewUserIsNewTeam");
     // accounts for the case where a team is provisioned, but the user creation
     // failed. In this case we have a valid previously created team but no
     // onboarding collection.
@@ -185,6 +199,7 @@ async function accountProvisioner({
     }
 
     if (provision) {
+      Logger.info("http", "provisionFirstCollection");
       await provisionFirstCollection(team, user);
     }
   }

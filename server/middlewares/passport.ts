@@ -28,9 +28,6 @@ export default function createMiddleware(providerName: string) {
       },
       async (err, user, result: AuthenticationResult) => {
         Logger.error(err, err instanceof InternalOAuthError ? err.oauthError : err)
-        Logger.error(user, err instanceof InternalOAuthError ? err.oauthError : err)
-        Logger.error(result?.user?.name, err instanceof InternalOAuthError ? err.oauthError : err)
-        Logger.error(result?.team?.name, err instanceof InternalOAuthError ? err.oauthError : err)
         if (err) {
           Logger.error(
             "Error during authentication",
