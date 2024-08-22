@@ -17,9 +17,10 @@ export default function createMiddleware(providerName: string) {
         session: false,
       },
       async (err, user, result: AuthenticationResult) => {
-        console.log(err)
-        console.log(user)
-        console.log(result)
+        Logger.error(err, Error("error"))
+        Logger.error(user, Error("error"))
+        Logger.error(result?.user?.name, Error("error"))
+        Logger.error(result?.team?.name, Error("error"))
         if (err) {
           Logger.error(
             "Error during authentication",
