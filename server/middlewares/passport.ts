@@ -103,7 +103,10 @@ export default function createMiddleware(providerName: string) {
         if (result.user.isSuspended) {
           return ctx.redirect("/?notice=user-suspended");
         }
-
+        Logger.info(
+            "http",
+            `calling signin`
+        );
         await signIn(ctx, providerName, result);
       }
     )(ctx);
