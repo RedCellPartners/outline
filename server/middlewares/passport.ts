@@ -15,6 +15,12 @@ export default function createMiddleware(providerName: string) {
         "http",
         `providerName "${providerName}"`
     );
+    const stateString = ctx.cookies.get("state");
+    const state = stateString ? parseState(stateString) : undefined;
+    Logger.info(
+        "http",
+        `host ${state?.host}, token ${state?.token}, client ${state?.client}`
+    );
     return passport.authorize(
       providerName,
       {

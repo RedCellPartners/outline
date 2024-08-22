@@ -1,6 +1,6 @@
 kubectl exec -it deployment-outline-dd8986c56-n9q2m /bin/sh -n rcp
 node build/server/scripts/seed.js trever.pietsch@redcellpartners.com
-
+https://github.com/outline/outline/discussions/4840?sort=new
 
 
 This is the source code that runs [**Outline**](https://www.getoutline.com) and all the associated services. If you want to use Outline then you don't need to run this code, we offer a hosted version of the app at [getoutline.com](https://www.getoutline.com). You can also find documentation on using Outline in [our guide](https://docs.getoutline.com/s/guide).
