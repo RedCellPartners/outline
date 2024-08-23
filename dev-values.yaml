@@ -17,6 +17,7 @@ helm-repo:
     PORT: "443"
     NODE_ENV: "production"
     DEBUG: "http"
+    LOG_LEVEL: "DEBUG"
     AWS_ACCESS_KEY_ID: "AKIAQE3RO2MLYD6IF35Z"
     AWS_S3_UPLOAD_BUCKET_URL: "https://outline-07b8b987-303c-4b28-ada8-686c3fe74a07.s3.amazonaws.com"
     AWS_REGION: "us-east-1"
