@@ -22,14 +22,14 @@ export function getSSLOptions() {
     return {
       key:
         (env.SSL_KEY
-          ? Buffer.from(env.SSL_KEY, "base64").toString("ascii")
+          ? Buffer.from(env.SSL_KEY).toString("ascii")
           : undefined) ||
         safeReadFile("private.key") ||
         safeReadFile("private.pem") ||
         safeReadFile("server/config/certs/private.key"),
       cert:
         (env.SSL_CERT
-          ? Buffer.from(env.SSL_CERT, "base64").toString("ascii")
+          ? Buffer.from(env.SSL_CERT).toString("ascii")
           : undefined) ||
         safeReadFile("public.cert") ||
         safeReadFile("public.pem") ||

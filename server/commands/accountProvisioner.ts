@@ -176,11 +176,11 @@ async function accountProvisioner({
   // TODO: Move to processor
   if (isNewUser) {
     Logger.info("http", "isNewUser");
-    // await new WelcomeEmail({
-    //   to: user.email,
-    //   role: user.role,
-    //   teamUrl: team.url,
-    // }).schedule();
+    await new WelcomeEmail({
+      to: user.email,
+      role: user.role,
+      teamUrl: team.url,
+    }).schedule();
   }
 
   if (isNewUser || isNewTeam) {
