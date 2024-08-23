@@ -36,5 +36,3 @@ helm-repo:
     OIDC_LOGOUT_URI: "https://authentik.kaledo.ai/application/o/wiki/end-session/"
     OIDC_DISPLAY_NAME: "authentik"
     OIDC_USERNAME_CLAIM: "email"
-    SSL_KEY: "/etc/ssl/tls.key"
-    SSL_CERT: "/etc/ssl/tls.crt"
