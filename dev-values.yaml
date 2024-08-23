@@ -1,7 +1,7 @@
 helm-repo:
   service:
-    port: 443
-    targetPort: 8443
+    port: 80
+    targetPort: 3000
     name: "outline"
     image: "010438497047.dkr.ecr.us-east-1.amazonaws.com/ecr:outline-$ARGOCD_APP_REVISION"
     memoryRequest: "1G"
@@ -14,7 +14,7 @@ helm-repo:
     addCert: "true"
     replicas: 1
   configMapValues:
-    PORT: "8443"
+    PORT: "3000"
     NODE_ENV: "production"
     DEBUG: "http"
     LOG_LEVEL: "debug"
