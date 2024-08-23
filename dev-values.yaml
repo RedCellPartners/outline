@@ -1,7 +1,7 @@
 helm-repo:
   service:
-    port: 3000
-    targetPort: 3000
+    port: 443
+    targetPort: 443
     name: "outline"
     image: "010438497047.dkr.ecr.us-east-1.amazonaws.com/ecr:outline-$ARGOCD_APP_REVISION"
     memoryRequest: "1G"
@@ -10,9 +10,11 @@ helm-repo:
     cpuLimit: "1000m"
     hcpSecretAppName: "outline"
     hcpSecretRefresh: "24h"
+    createJksKeystore: "true"
+    addCert: "true"
     replicas: 1
   configMapValues:
-    PORT: "3000"
+    PORT: "443"
     NODE_ENV: "production"
     DEBUG: "http"
     AWS_ACCESS_KEY_ID: "AKIAQE3RO2MLYD6IF35Z"
@@ -33,3 +35,5 @@ helm-repo:
     OIDC_LOGOUT_URI: "https://authentik.kaledo.ai/application/o/wiki/end-session/"
     OIDC_DISPLAY_NAME: "authentik"
     OIDC_USERNAME_CLAIM: "email"
+    SSL_KEY: "/etc/ssl/tls.key"
+    SSL_CERT: "/etc/ssl/tls.crt"
