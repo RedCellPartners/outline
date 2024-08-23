@@ -3,7 +3,7 @@ helm-repo:
     port: 80
     targetPort: 3000
     name: "outline"
-    image: "010438497047.dkr.ecr.us-east-1.amazonaws.com/ecr:outline-$ARGOCD_APP_REVISION"
+    image: "outlinewiki/outline:0.78.0"
     memoryRequest: "1G"
     memoryLimit: "2G"
     cpuRequest: "500m"

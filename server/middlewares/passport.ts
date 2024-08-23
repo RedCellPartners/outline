@@ -11,23 +11,12 @@ import { parseState } from "@server/utils/passport";
 
 export default function createMiddleware(providerName: string) {
   return function passportMiddleware(ctx: Context) {
-    Logger.info(
-        "http",
-        `providerName "${providerName}"`
-    );
-    const stateString = ctx.cookies.get("state");
-    const state = stateString ? parseState(stateString) : undefined;
-    Logger.info(
-        "http",
-        `host ${state?.host}, token ${state?.token}, client ${state?.client}`
-    );
     return passport.authorize(
       providerName,
       {
         session: false,
       },
       async (err, user, result: AuthenticationResult) => {
-        Logger.error(err, err instanceof InternalOAuthError ? err.oauthError : err)
         if (err) {
           Logger.error(
             "Error during authentication",
@@ -103,10 +92,6 @@ export default function createMiddleware(providerName: string) {
         if (result.user.isSuspended) {
           return ctx.redirect("/?notice=user-suspended");
         }
-        Logger.info(
-            "http",
-            `calling signin`
-        );
         await signIn(ctx, providerName, result);
       }
     )(ctx);
