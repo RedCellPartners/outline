@@ -24,6 +24,7 @@ helm-repo:
 #    AWS_S3_ACL: "private"
     FILE_STORAGE_UPLOAD_MAX_SIZE: "80000000"
     FILE_STORAGE: "local"
+    FILE_STORAGE_LOCAL_ROOT_DIR: "/var/lib/outline/data"
     FILE_STORAGE_IMPORT_MAX_SIZE: "80000000"
     FILE_STORAGE_WORKSPACE_IMPORT_MAX_SIZE: "80000000"
     URL: "https://wiki.kaledo.ai"
