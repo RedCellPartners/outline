@@ -16,8 +16,6 @@ helm-repo:
   configMapValues:
     PORT: "3000"
     NODE_ENV: "production"
-    DEBUG: "http"
-    LOG_LEVEL: "debug"
     AWS_ACCESS_KEY_ID: "AKIAQE3RO2MLYD6IF35Z"
     AWS_S3_UPLOAD_BUCKET_URL: "https://s3.amazonaws.com"
     AWS_S3_UPLOAD_BUCKET_NAME: "outline-07b8b987-303c-4b28-ada8-686c3fe74a07"
@@ -25,7 +23,7 @@ helm-repo:
     AWS_S3_FORCE_PATH_STYLE: "true"
     AWS_S3_ACL: "private"
     FILE_STORAGE_UPLOAD_MAX_SIZE: "80000000"
-#    FILE_STORAGE: "local"
+    FILE_STORAGE: "s3"
     FILE_STORAGE_IMPORT_MAX_SIZE: "80000000"
     FILE_STORAGE_WORKSPACE_IMPORT_MAX_SIZE: "80000000"
     URL: "https://wiki.kaledo.ai"
