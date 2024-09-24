@@ -1,3 +1,6 @@
+https://github.com/Recks11/Webflux-OAuth2-Authorization-Server - maybe for custom oauth server
+
+
 kubectl exec -it deployment-outline-dd8986c56-n9q2m /bin/sh -n rcp
 node build/server/scripts/seed.js trever.pietsch@redcellpartners.com
 https://github.com/outline/outline/discussions/4840?sort=new
