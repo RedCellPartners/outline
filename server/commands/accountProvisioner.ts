@@ -118,11 +118,7 @@ async function accountProvisioner({
         ],
       });
 
-      Logger.info("http", "provisioner checkpoint 3");
-
       if (authenticationProvider) {
-        Logger.info("http", "provisioner checkpoint 4");
-
         emailMatchOnly = true;
         result = {
           authenticationProvider,
