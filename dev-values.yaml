@@ -11,6 +11,9 @@ helm-repo:
     hcpSecretAppName: "outline"
     hcpSecretRefresh: "24h"
     createJksKeystore: "true"
+    hasVolumeMounts: "true"
+    efsMountPath: "/var/lib/outline/data"
+    pvcClaimName: "efs-pvc"
     addCert: "true"
     replicas: 1
   configMapValues:
