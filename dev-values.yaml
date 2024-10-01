@@ -15,6 +15,7 @@ helm-repo:
     efsMountPath: "/var/lib/outline/data"
     pvcClaimName: "efs-pvc"
     addCert: "true"
+    asRoot: "true"
     replicas: 1
   configMapValues:
     PORT: "3000"
