@@ -39,3 +39,4 @@ helm-repo:
     OIDC_LOGOUT_URI: "https://authentik.kaledo.ai/application/o/wiki/end-session/"
     OIDC_DISPLAY_NAME: "Authentik"
     OIDC_USERNAME_CLAIM: "email"
+    LOG_LEVEL: "warn"
