@@ -3,7 +3,7 @@ helm-repo:
     port: 80
     targetPort: 3000
     name: "outline2"
-    image: "outlinewiki/outline-enterprise:0.80.1"
+    image: "outlinewiki/outline-enterprise:0.80.2"
     memoryRequest: "1G"
     memoryLimit: "2G"
     cpuRequest: "500m"
