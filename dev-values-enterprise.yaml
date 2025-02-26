@@ -40,4 +40,4 @@ helm-repo:
     OIDC_DISPLAY_NAME: "Authentik"
     OIDC_USERNAME_CLAIM: "email"
     LOG_LEVEL: "warn"
-    OPENAI_URL: "https://llm.kaledo.ai"
+    OPENAI_URL: "https://llm.kaledo.ai/v1/chat/completions"
