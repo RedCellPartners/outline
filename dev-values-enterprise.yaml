@@ -40,3 +40,5 @@ helm-repo:
     OIDC_DISPLAY_NAME: "Authentik"
     OIDC_USERNAME_CLAIM: "email"
     LOG_LEVEL: "warn"
+#    to keep VPN on for outline
+    OPENAI_URL: "https://service-rcp-proxy.rcp.svc.cluster.local"
