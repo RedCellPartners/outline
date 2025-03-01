@@ -37,6 +37,6 @@ helm-repo:
     OIDC_TOKEN_URI: "https://authentik.kaledo.ai/application/o/token/"
     OIDC_USERINFO_URI: "https://authentik.kaledo.ai/application/o/userinfo/"
     OIDC_LOGOUT_URI: "https://authentik.kaledo.ai/application/o/wiki/end-session/"
-    OIDC_DISPLAY_NAME: "Authentik"
+    OIDC_DISPLAY_NAME: "RCP"
     OIDC_USERNAME_CLAIM: "email"
     LOG_LEVEL: "warn"
